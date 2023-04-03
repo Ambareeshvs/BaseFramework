@@ -22,16 +22,16 @@
 
 
 <div class="container">
-    <div class="row">
+    <div class="row ">
         @foreach (var item in Model)
         {
-            <div class="col col-4">
+            <div class="col col-4 mb-4">
                 <div class="card h-100">
 
                     @if (item.Images.Count() != 0)
                     {
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
+                            <div class="carousel-inner">    
                                 <div class="carousel-item active">
                                     <img class="d-block w-100" src="~/Images/@item.Images.FirstOrDefault().Image" width="100%" height="250px" style="object-fit:contain" alt="First slide">
                                 </div>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="media">
-                            <img class="mr-3 rounded-circle" src="~/Images/@item.User.image" alt="Image of the post Adder" style="max-width:50px">
+                            <img class="mr-3 rounded-circle" src="~/Images/@item.User.image" alt="Image of the post Adder" width="50px" height="50px" style="max-width:50px; object-fit:contain">
                             <div class="media-body">
                                 <h6 class="card-title">@item.User.firstName</h6>
                                 <small>@item.User.user.phoneNumber</small>
@@ -84,7 +84,7 @@
     <script>
         $(document).ready(function () {
             $('.carousel').carousel({
-                interval: 5000
+                interval: 3000
             });
         });
     </script>

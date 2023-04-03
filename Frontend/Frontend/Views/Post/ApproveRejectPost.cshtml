@@ -1,10 +1,34 @@
 ﻿@model IEnumerable<Frontend.DTO.Response.PostResponseDTO>
 
+
+
 @{
     Layout = "_MenuLayout";
     ViewData["Title"] = "Approve Reject Post";
     var fullName = "";
 }
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css" />
+<div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModelLabel">Delete</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you want to delete ?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a id="deletebtn" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div class="toolbar h-45px">
     <div class="container-fluid d-flex flex-stack">
@@ -14,116 +38,140 @@
         </div>
     </div>
 </div>
-
-<table id="approve" class="table">
-    <thead>
-        <tr>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.PostId)
-            </th>
-            <th>
-                Date
-            </th>
-            <th>
-                Time
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User.user.userName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Subject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.IsDeleted)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.IsLiked)
-            </th>
-            <th hidden>
-                @Html.DisplayNameFor(model => model.LikeCount)
-            </th>
-            <th>
-                Actions
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            {
-                fullName = $"{item.User.firstName} {item.User.lastName}";
-            }
+<div class="card" style="padding-left:15px;padding-right:15px">
+    <table id="approve" class="table">
+        <thead>
             <tr>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.PostId)
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.CreatedAt)*@
-                    @Convert.ToDateTime(item.CreatedAt).ToString("dd/MM/yyyy")
-                </td>
-                <td>
-                    @Convert.ToDateTime(item.CreatedAt).ToString("HH:MM")
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => fullName )*@
-                    @fullName
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Subject)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.Image)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.IsActive)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.IsDeleted)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.UserId)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.IsLiked)
-                </td>
-                <td hidden>
-                    @Html.DisplayFor(modelItem => item.LikeCount)
-                </td>
-                <td>
-                    @if (!item.IsActive)
-                    {
-                        <a asp-action="ApprovePost" asp-controller="Post" asp-route-id="@item.PostId" class="btn-btn-primary mr-2"><i class="fa fa-thumbs-up text-success"></i></a>
-
-                        <a asp-action="RejectPost" asp-controller="Post" asp-route-id="@item.PostId" class="btn-btn-primary"><i class="fa fa-thumbs-down text-danger"></i></a>
-                    }else
-                    {
-                        <a asp-action="RejectPost" asp-controller="Post" asp-route-id="@item.PostId" class="btn-btn-primary"><i class="fa fa-trash "></i></a>
-                    }
-                </td>
-
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.PostId)
+                </th>
+                <th>
+                    Date
+                </th>
+                <th hidden>
+                    Time
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.user.userName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subject)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Content)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.IsDeleted)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.IsLiked)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.LikeCount)
+                </th>
+                <th>
+                    Actions
+                </th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                {
+                    fullName = $"{item.User.firstName} {item.User.lastName}";
+                }
+                <tr>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.PostId)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.CreatedAt)*@
+                        @Convert.ToDateTime(item.CreatedAt).ToString("dd/MM/yyyy")
+                    </td>
+                    <td hidden>
+                        @Convert.ToDateTime(item.CreatedAt).ToString("HH:MM")
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => fullName )*@
+                        @fullName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subject)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Content)
+                    </td>
+                    <td>
+                        <text ><img class="Image" src="~/Images/@item.Image" style="width:80px;height:80px;object-fit"  alt="image"></text>
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.IsDeleted)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.IsLiked)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.LikeCount)
+                    </td>
+                    <td>
+                        @if (!item.IsActive)
+                        {
+                            <a asp-action="ApprovePost" asp-controller="Post" asp-route-id="@item.PostId" class="btn-btn-primary mr-2"><i class="fa fa-thumbs-up fa-2x text-success"></i>&nbsp;&nbsp;&nbsp;</a>
+
+
+
+                            <a asp-action="RejectPost" asp-controller="Post" asp-route-id="@item.PostId" class="btn-btn-primary"><i class="fa fa-thumbs-down fa-2x text-danger"></i></a>
+                        }
+                        else
+                        {
+                           
+                            <a class="btn-btn-primary" id="delete" onclick="deletefunction('@item.PostId')"><i class="fa fa-trash fa-2x text-danger"></i></a>
+                        }
+                    </td>
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
 @section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src=" https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function () {
             $('#approve').DataTable();
         });
+        var deletefunction = function (id) {
+
+            console.log(id)
+            $('#deleteModel').modal('show');
+            $('#deletebtn').attr('href', '/Post/RejectPost?id=' + id + '');
+        }
     </script>
+
+    
+
 }
+
+

@@ -451,8 +451,8 @@ namespace Backend.Core.Repository
             DashbordViewModel model = new DashbordViewModel()
             {
                 ApprovedItemsCount = await _context.PostList.Where(item => item.IsActive == true).CountAsync(),
-                PendingItemsCount = await _context.PostList.Where(item => item.IsActive == false).CountAsync(),
-                RejectedItemsCount=await _context.PostList.Where(item=>item.IsDeleted==false).CountAsync()
+                PendingItemsCount = await _context.PostList.Where(item => item.IsActive == false && item.IsDeleted == false).CountAsync(),
+                RejectedItemsCount=await _context.PostList.Where(item=>item.IsDeleted==true).CountAsync()
             };
             return model;
         }

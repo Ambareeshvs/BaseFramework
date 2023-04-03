@@ -14,6 +14,7 @@ using NToastNotify;
 namespace Frontend.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles ="Admin")]
     public class AdministrativeController : BaseController
     {
         private readonly IGenericHttpClient _client;

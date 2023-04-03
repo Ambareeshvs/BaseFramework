@@ -19,7 +19,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="user d-flex flex-row align-items-center">
                             <img src="~/Images/@item.User.image" width="30" class="rounded-circle mr-2 alt="No image">
-                            <div class="d-flux flux-col">
+                            <div class="d-flux flux-col px-2">
                                     <div><strong class="font-weight-bold text-primary">@item.User.firstName @item.User.lastName</strong></div>
                                     <div><small class="font-weight-bold">@item.Comment</small></div>
                                 </div>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="action d-flex justify-content-end mt-2 align-items-center">
                         <div class="icons align-items-center">
-                            <a class="fa fa-edit btn btn-primary"></a>
+                            @*<a class="fa fa-edit btn btn-primary"></a>*@
                             <a class="fa fa-trash btn btn-danger" aria-hidden="true" asp-route-id="@item.CommentId" asp-action="DltComment" asp-controller="Post"></a>
                         </div>
                     </div>

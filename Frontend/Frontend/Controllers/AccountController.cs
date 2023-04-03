@@ -263,7 +263,13 @@ namespace Frontend.Controllers
                 new Claim("Images", model.image ?? "Blank.png"),
                 new Claim("Roles", model?.Role?.Count() > 0 ? "T" : "F")
 
-        };
+            };
+
+            foreach(var item in model.Role)
+            {
+                claims.Add(new Claim(ClaimTypes.Role,item));
+            }
+
             Roles = model?.Role?.Count() > 0 ? "T" : "F";
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -329,6 +335,9 @@ namespace Frontend.Controllers
             }
         }
 
-
+        public async Task<IActionResult> AccessDenied()
+        {
+            return View();
+        }
     }
 }
