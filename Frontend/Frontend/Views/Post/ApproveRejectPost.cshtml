@@ -8,6 +8,12 @@
     var fullName = "";
 }
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link href="~/css/admincardview.css" rel="stylesheet" />
+
 <div class="modal fade" id="deleteModel" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -38,7 +44,109 @@
         </div>
     </div>
 </div>
-<div class="card" style="padding-left:15px;padding-right:15px">
+
+
+<div style="margin-left:2rem;margin-right:2rem;">
+
+    <table id="myTable" class="table  hover " style="background-color:transparent">
+        <thead class="thead">
+            <tr style="">
+                <th hidden="hidden">
+                    @Html.DisplayNameFor(model => model.PostId)
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr style="border-color:">
+                    <td hidden="hidden">
+                        @Html.DisplayFor(modelItem => item.PostId)
+                    </td>
+
+
+
+                    <td>
+                        <div class="card card-body" style="margin-bottom:10px;">
+                            <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+                                <div class="mr-2 mb-3 mb-lg-0">
+                                    <text ><img class="Image" src="~/Images/@item.Image" style="width:150px;height:150px;object-fit"  alt="image"> </text>
+                                </div>
+
+                                <div class="media-body">
+                                    <h6 class="media-title font-weight-semibold">
+                                        @Html.DisplayFor(modelItem => item.Subject)
+                                    </h6>
+                                    <p class="mb-3" style="max-width: 60vw; max-height:5rem;overflow:hidden;">@Html.DisplayFor(modelItem => item.Content)</p>
+
+
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <ul class="list-inline list-inline-dotted mb-3 mb-lg-2 d-flex">
+
+                                                <li class="list-inline-item">
+                                                    <b>
+                                                        @Html.DisplayFor(modelItem => item.User.firstName)
+                                                        @Html.DisplayFor(modelItem => item.User.lastName) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </b>
+                                                </li>
+                                                <li class="list-inline-item">@Convert.ToDateTime(item.CreatedAt).ToString("dd/MM/yyyy") @Convert.ToDateTime(item.CreatedAt).ToString("HH:MM")</li>
+                                            </ul>
+
+                                        </div>
+                                        <div>
+                                            <div class="d-flex">
+                                                @if (!item.IsActive)
+                                                {
+                                                    <a asp-action="ApprovePost" asp-controller="Post" asp-route-id="@item.PostId" class="btn-btn-primary mr-2"><i class="fa fa-thumbs-up fa-2x text-success"></i>&nbsp;&nbsp;&nbsp;</a>
+
+
+
+                                                    <a asp-action="RejectPost" asp-controller="Post" asp-route-id="@item.PostId" class="btn-btn-primary"><i class="fa fa-thumbs-down fa-2x text-danger"></i></a>
+                                                }
+                                                else
+                                                {
+
+                                                    <a class="btn-btn-primary" id="delete" onclick="deletefunction('@item.PostId')"><i class="fa fa-trash fa-2x text-danger"></i></a>
+                                                }
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="card" style="padding-left:15px;padding-right:15px">
     <table id="approve" class="table">
         <thead>
             <tr>
@@ -94,15 +202,17 @@
                         @Html.DisplayFor(modelItem => item.PostId)
                     </td>
                     <td>
-                        @*@Html.DisplayFor(modelItem => item.CreatedAt)*@
-                        @Convert.ToDateTime(item.CreatedAt).ToString("dd/MM/yyyy")
+                        @*
+
+                        @Html.DisplayFor(modelItem => item.CreatedAt)*@
+@*@Convert.ToDateTime(item.CreatedAt).ToString("dd/MM/yyyy")
                     </td>
                     <td hidden>
                         @Convert.ToDateTime(item.CreatedAt).ToString("HH:MM")
                     </td>
-                    <td>
-                        @*@Html.DisplayFor(modelItem => fullName )*@
-                        @fullName
+                    <td>*@
+@*@Html.DisplayFor(modelItem => fullName )*@
+@* @fullName
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Subject)
@@ -139,7 +249,7 @@
                         }
                         else
                         {
-                           
+
                             <a class="btn-btn-primary" id="delete" onclick="deletefunction('@item.PostId')"><i class="fa fa-trash fa-2x text-danger"></i></a>
                         }
                     </td>
@@ -150,9 +260,7 @@
             }
         </tbody>
     </table>
-</div>
-
-
+</div>*@
 
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -170,7 +278,7 @@
         }
     </script>
 
-    
+
 
 }
 

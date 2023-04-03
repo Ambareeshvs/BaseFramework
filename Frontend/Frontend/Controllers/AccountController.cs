@@ -33,7 +33,7 @@ namespace Frontend.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                if (User.FindFirstValue("ROles")=="T")
+                if (User.FindFirstValue("Roles")=="T")
                 {
                     return RedirectToAction("index", "Administrative", new { area = "Admin" });
 
@@ -305,21 +305,6 @@ namespace Frontend.Controllers
         }
 
 
-        //[HttpGet]
-        //public async Task<IActionResult> UsersList()
-        //{
-        //    try
-        //    {
-        //        var result = await _client.GetAllAsync<UserResponseDTO>(ApiConstants.GetAllUsers);
-        //        return View(result.Response);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        DisplayErrors(ex);
-        //        return View();
-        //    }
-        //}
-
         [HttpGet]
         public async Task<JsonResult> UsersListdata()
         {
@@ -338,6 +323,12 @@ namespace Frontend.Controllers
         public async Task<IActionResult> AccessDenied()
         {
             return View();
+        }
+
+        public async Task<IActionResult> LandingPage()
+        {
+            var response = await _client.GetAllAsync<NewsResponseDTO>(ApiConstants.GetAllNews);
+            return View(response.Response);
         }
     }
 }

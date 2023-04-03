@@ -15,10 +15,10 @@
 		<span asp-validation-for="UserName" class="text-danger"></span>
 	</div>
 	<div class="fv-row mb-10">
-		@*<div class="d-flex flex-stack mb-2">
+		<div class="d-flex flex-stack mb-2">
 			<label class="form-label text-dark fs-6 mb-0">Password</label>
-			<a tabindex="1" asp-action="ForgotPassword" asp-controller="Security" class="link-primary fs-6">Forgot Password ?</a>
-		</div>*@
+			
+		</div>
 		<input asp-for="Password"   placeholder="Password"   class="form-control form-control-lg form-control-solid PASS34" oncopy="return false;" onpaste="return false;" autocomplete="off" />
 		<span asp-validation-for="Password" class="text-danger"></span>
 	</div>

@@ -69,7 +69,7 @@
         <div class="page flex-row flex-column-fluid">
             <div id="kt_aside" class="aside aside-dark aside-hoverable" style="@ViewBag.dashboard" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_mobile_toggle">
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
-                    <a href="https://www.unityinfotech.com/"target="_blank" class="brand-logo">
+                    <a href="https://www.unityinfotech.com/" target="_blank" class="brand-logo">
                         <img alt="logo" src="/assets/media/logos/logo.png" class="h-25px logo" />
                     </a>
                     <div id="kt_aside_toggle" class="btn btn-icon w-auto px-0 btn-active-color-primary aside-toggle" data-kt-toggle="true" data-kt-toggle-state="active" data-kt-toggle-target="body" data-kt-toggle-name="aside-minimize">
@@ -90,11 +90,11 @@
 
 
                             <div data-kt-menu-trigger='click' class='menu-item menu-accordion'>
-                              @*  <span class="menu-link">
-                                    <span class="menu-icon"><i class=""></i></span>
-                                    <span class="menu-title">drop</span>
-                                    <span class="menu-arrow"></span>
-                                    <span class="menu-sub menu-sub-accordion menu-active-bg">123456789</span>
+                                @*  <span class="menu-link">
+                                <span class="menu-icon"><i class=""></i></span>
+                                <span class="menu-title">drop</span>
+                                <span class="menu-arrow"></span>
+                                <span class="menu-sub menu-sub-accordion menu-active-bg">123456789</span>
                                 </span>*@
 
 
@@ -136,7 +136,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div data-kt-menu-trigger='click' class='menu-item menu-accordion'>
                                     <span class="menu-link">
                                         <span class="menu-icon"><i class="bi bi-paperclip fs-3"></i></span>
@@ -156,7 +156,7 @@
                                                 <span class="menu-title">Manage Posts</span>
                                             </a>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
 
@@ -211,13 +211,13 @@
                                                 </a>
                                             </div>
                                         }
-                                        <div class="menu-item me-lg-1">
-                                            <a class="menu-link py-3 active" href="@Url.Action("GetAllNews", "News",new {area="default"})">
-                                                <span class="menu-title">News</span>
-                                            </a>
-                                        </div>
                                         @if (User.FindFirstValue(ClaimTypes.NameIdentifier) != null)
                                         {
+                                            <div class="menu-item me-lg-1">
+                                                <a class="menu-link py-3 active" href="@Url.Action("GetAllNews", "News",new {area="default"})">
+                                                    <span class="menu-title">News</span>
+                                                </a>
+                                            </div>
                                             <div class="menu-item me-lg-1">
                                                 <a class="menu-link py-3 active" href="@Url.Action("GetAllPosts", "Post",new {area="default"})">
                                                     <span class="menu-title">Post</span>
@@ -229,6 +229,14 @@
                                                 </a>
                                             </div>
                                         }
+                                        else
+                                        {
+                                            <div class="menu-item me-lg-1">
+                                                <a class="menu-link py-3 active" href="@Url.Action("LandingPage", "Account",new {area="default"})">
+                                                    <span class="menu-title">News</span>
+                                                </a>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -237,11 +245,11 @@
                                     <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                                         @if (User.FindFirstValue(ClaimTypes.NameIdentifier) != null)
                                         {
-                                            <a href="https://learning.unityinfotech.com/auth" target="_blank"><img src="/assets/media/logos/logo.png" class="d-flex align-items-center fw-bolder fs-3 my-1 h-25px" /></a>
+                                            <a href="https://learning.unityinfotech.com/auth" target="_blank"><img src="/assets/media/logos/logo.png" class="d-flex align-items-center fw-bolder fs-3 my-1 h-25px" title="LMS" /></a>
                                             <span class="h-20px border-gray-200 border-start mx-4"></span>
-                                            <a href="http://192.168.0.26:8012/" target="_blank"><img src="~/assets/media/logos/favicon.ico" class="d-flex align-items-center fw-bolder fs-3 my-1 rounded-circle w-30px" /></a>
+                                            <a href="http://192.168.0.26:8012/" target="_blank"><img src="~/assets/media/logos/favicon.ico" class="d-flex align-items-center fw-bolder fs-3 my-1 rounded-circle w-30px" title="ERP" /></a>
                                             <span class="h-20px border-gray-200 border-start mx-4"></span>
-                                            <a href="https://www.zoho.com/people/" target="_blank"><img src="~/images/zoho.png" class="d-flex align-items-center fw-bolder fs-3 my-1 rounded-circle w-40px" /></a>
+                                            <a href="https://www.zoho.com/people/" target="_blank"><img src="~/images/zoho.png" class="d-flex align-items-center fw-bolder fs-3 my-1 rounded-circle w-40px" title="Zoho" /></a>
                                             <span class="h-20px border-gray-200 border-start mx-4"></span>
                                         }
                                         <div class="form-text me-2">Welcome <a href="@Url.Action("Profile", "Account",new {area="default"})">@User.FindFirstValue(ClaimTypes.GivenName)</a></div>

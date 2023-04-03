@@ -6,10 +6,21 @@
     var Image = "";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+
+<style>
+
+
+
+</style>
+
 <link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
 <link href="~/lib/datatables/css/jquery.datatables.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css" />
-
+<link href="~/css/admincardview.css" rel="stylesheet" />
 <!-- Delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -55,33 +66,16 @@
 </div>
 <div style="margin-left:2rem;margin-right:2rem;">
 
-    <table id="myTable" class="table table-bordered table-responsive hover table-row-bordered" style="background-color:white">
-        <thead class="thead-dark">
-            <tr style="border-color:black">
+    <table id="myTable" class="table  hover " style="background-color:transparent">
+        <thead class="thead">
+            <tr style="">
                 <th hidden="hidden">
                     @Html.DisplayNameFor(model => model.NewsId)
                 </th>
                 <th>
-                    Date
+
                 </th>
-                <th>
-                    Time
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Subject)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Content)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Image)
-                </th>
-                <th>
-                    Actions
-                </th>
+
             </tr>
         </thead>
         <tbody>
@@ -89,46 +83,68 @@
             {
 
 
-                <tr style="border-color:black">
+                <tr style="border-color:">
                     <td hidden="hidden">
                         @Html.DisplayFor(modelItem => item.NewsId)
                     </td>
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item.CreatedAt)*@
-                        @Convert.ToDateTime(item.CreatedAt).ToString("dd/MM/yyyy")
-                    </td>
-                    <td>
-                        @Convert.ToDateTime(item.CreatedAt).ToString("HH:MM")
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.firstName)
-                        @Html.DisplayFor(modelItem => item.User.lastName)
-                    </td>
-                    <td>
-                        <b>@Html.DisplayFor(modelItem => item.Subject)</b>
-                    </td>
-                    <td class="text-truncate" style="max-width: 30vw; max-height:3rem;overflow:hidden;">
-                        @Html.DisplayFor(modelItem => item.Content)
-                    </td>
-                    <td>
-                        @{
-                            Image = item.Image;
-                        }
-                        <img src="~/Images/@Image" style="height:100px;width:100px">
-                    </td>
-                    <td>
 
-                        <button class=" btn btn-primary btn-sm" onclick="edit('@item.NewsId')"><i class="bi bi-pencil-square"></i></button>
 
-                        <hr>
 
-                        <button class=" btn btn-danger btn-sm " data-target="#delete" id="delete" onclick="deletefunction('@item.NewsId')"><i class="fa fa-trash"></i></button>
+                    <td>
+                        <div class="card card-body" style="margin-bottom:10px;">
+                            <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+                                <div class="mr-2 mb-3 mb-lg-0">
+                                    @{
+                                        Image = item.Image;
+                                    }
+                                    <img src="~/Images/@Image" style="height:150px;width:150px">
+
+                                </div>
+
+                                <div class="media-body">
+                                    <h6 class="media-title font-weight-semibold">
+                                        <a asp-action="SingleNews" asp-route-id="@item.NewsId" data-abc="true">@Html.DisplayFor(modelItem => item.Subject)</a>
+                                    </h6>
+                                    <p class="mb-3" style="max-width: 60vw; max-height:5rem;overflow:hidden;">@Html.DisplayFor(modelItem => item.Content)</p>
+
+
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <ul class="list-inline list-inline-dotted mb-3 mb-lg-2 d-flex">
+
+                                                <li class="list-inline-item">
+                                                    <b>
+                                                        @Html.DisplayFor(modelItem => item.User.firstName)
+                                                        @Html.DisplayFor(modelItem => item.User.lastName) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    </b>
+                                                </li>
+                                                <li class="list-inline-item">@Convert.ToDateTime(item.CreatedAt).ToString("dd/MM/yyyy") @Convert.ToDateTime(item.CreatedAt).ToString("HH:MM")</li>
+                                            </ul>
+
+                                        </div>
+                                        <div>
+                                            <div class="d-flex">
+                                                <button class=" btn btn-primary btn-sm" style="padding:5px 10px 8px 10px;" onclick="edit('@item.NewsId')"><i class="bi bi-pencil-square"></i></button>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button class=" btn btn-danger btn-sm " style="padding:5px 10px 8px 10px;" data-target="#delete" id="delete" onclick="deletefunction('@item.NewsId')"><i class="fa fa-trash"></i></button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+
+
+
 
 @section scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -183,7 +199,9 @@
         }
 
         $(document).ready(function () {
-            $('#myTable').DataTable();
+            $('#myTable').DataTable({
+                "ordering": false
+            });
         });
 
 

@@ -50,10 +50,10 @@ app.UseNToastNotify();
 
 app.MapControllerRoute(
     name: "Admin",
-    pattern: "{area:exists}/{controller=News}/{action=GetAllNews}/{id?}");
+    pattern: "{area:exists}/{controller=Account}/{action=LandingPage}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=News}/{action=GetAllNews}/{id?}");
+    pattern: "{controller=Account}/{action=LandingPage}/{id?}");
 
 app.Run();

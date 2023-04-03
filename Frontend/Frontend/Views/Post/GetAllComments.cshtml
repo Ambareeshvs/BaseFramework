@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Frontend.DTO.Request.CommentRequestDTO>
+@using System.Security.Claims;
 
 @{
     Layout = "_Layout1";
@@ -28,8 +29,11 @@
                     <div class="action d-flex justify-content-end mt-2 align-items-center">
                         <div class="icons align-items-center">
                             @*<a class="fa fa-edit btn btn-primary"></a>*@
+                        @if (User.FindFirstValue(ClaimTypes.NameIdentifier) == item.UserId || User.FindFirstValue("Roles") == "T")
+                        {
                             <a class="fa fa-trash btn btn-danger" aria-hidden="true" asp-route-id="@item.CommentId" asp-action="DltComment" asp-controller="Post"></a>
-                        </div>
+                        }
+                    </div>
                     </div>
                 </div>
             }

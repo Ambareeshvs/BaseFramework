@@ -1,0 +1,148 @@
+﻿@model List<NewsResponseDTO>
+
+<link href="~/css/landingpage.css" rel="stylesheet" />
+<link href="~/font-awesome/css/all.css" rel="stylesheet" />
+
+    <style>
+        /* Styling Body-part */
+        .body-part {
+            width: 600px;
+            height: 200px;
+            border: 3px solid black;
+            overflow: auto;
+        }
+
+        h2 {
+            color: green;
+        }
+
+
+        /* Justifying Content text */
+        p {
+            text-align: justify;
+            margin: 40px;
+        }
+
+
+        /* Styling icons */
+        .icon-list {
+            background-color:red;
+            position: fixed;
+            margin-top: 23px;
+            right: 10%;
+            transform: translateY(-50%);
+        }
+
+            .icon-list a {
+                display: block;
+                text-align: center;
+                padding: 8px;
+                transition: all 0.5s ease;
+                color: white;
+                font-size: 15px;
+                float: right;
+            }
+
+
+                /* HOver affect on icons */
+                .icon-list a:hover {
+                    color: #000;
+                    width: 50px;
+                }
+
+
+        /* Designing each icons */
+        .instagram {
+            background: #3f729b;
+            color: white;
+        }
+
+        .facebook {
+            background: #3b5998;
+            color: white;
+        }
+
+        .twitter {
+            background: #00acee;
+            color: white;
+        }
+
+        .linkedin {
+            background: #0e76a8;
+            color: white;
+        }
+
+        .google {
+            background: #db4a39;
+            color: white;
+        }
+
+        .youtube {
+            background: #c4302b;
+            color: white;
+        }
+    </style>
+
+
+
+<div class="d-flex justify-content-between align-items-center m-4 mt-2">
+    <div class="d-flex">
+        <a href="https://www.unityinfotech.com/" target="_blank">
+            <img alt="Logo" src="/assets/media/logos/logo.png" class="login-logo" />
+        </a>
+    </div>
+    <div class="d-flex justify-content-between">
+
+        <div class="icon-list">
+            <a href="https://instagram.com/unityinfotech?igshid=YmMyMTA2M2Y=" class="instagram" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="https://m.facebook.com/unityinfotech01" class="facebook" target="_blank">
+                <i class="fab fa-facebook"></i>
+            </a>
+
+            <a href="https://twitter.com/unityinfotech01?lang=en" class="twitter" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/company/unity-infotech/" class="linkedin" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+
+            <a href="https://youtube.com/unityinfotech5397" class="youtube" target="_blank">
+                <i class="fab fa-youtube"></i>
+            </a>
+        </div>
+
+        <div><a href="@Url.Action("Login", "Account",new {area="default"})" class="btn btn-primary mt-1">Login </a></div>
+    </div>
+</div>
+@*<div class="toolbar">
+
+</div>*@
+
+
+<header>
+    <h1>Cool Articles</h1>
+</header>
+<div class="band">
+
+    @for (int i = 0, j = 1; i < Model.Count(); i++, j++)
+    {
+        @if (j == 8)
+        {
+            j = 1;
+        }
+        <div class="item-@j">
+            <a asp-action="SingleNews" asp-controller="News" asp-route-id="@Model[i].NewsId" class="card">
+                <div class="thumb" style="background-image: url(../Images/@Model[i].Image);"></div>
+                <article>
+                    <h1>@Model[i].Subject</h1>
+                    <span>@Model[i].User.firstName    @Model[i].User.lastName</span>
+                </article>
+            </a>
+        </div>
+
+    }
+</div>
