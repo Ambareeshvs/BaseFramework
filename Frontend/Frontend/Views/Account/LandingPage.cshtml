@@ -110,7 +110,7 @@
                 <i class="fab fa-linkedin"></i>
             </a>
 
-            <a href="https://youtube.com/unityinfotech5397" class="youtube" target="_blank">
+            <a href="https://youtube.com/@@unityinfotech5397" class="youtube" target="_blank">
                 <i class="fab fa-youtube"></i>
             </a>
         </div>
@@ -124,7 +124,7 @@
 
 
 <header>
-    <h1>Cool Articles</h1>
+    <h1>Trending Articles</h1>
 </header>
 <div class="band">
 
@@ -136,7 +136,7 @@
         }
         <div class="item-@j">
             <a asp-action="SingleNews" asp-controller="News" asp-route-id="@Model[i].NewsId" class="card">
-                <div class="thumb" style="background-image: url(../Images/@Model[i].Image);"></div>
+                <div class="thumb"  style="background-image: url(../Images/@Model[i].Image);"></div>
                 <article>
                     <h1>@Model[i].Subject</h1>
                     <span>@Model[i].User.firstName    @Model[i].User.lastName</span>
