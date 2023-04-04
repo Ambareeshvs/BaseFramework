@@ -2,7 +2,7 @@
 C# Api-Client framework template 
 
 This is a .NET Core 6.0 project which helps to understand how to connect API's with client application. This web application contains some CRUD functions for Ads, News and Post.
-The Admin user has given all privilages and a commin user has restricted privilages.
+The Admin user has given all privilages and a common user has restricted privilages.
 
 The Backend Folder contains the API and it's code and the Frontend Folder contains the client side.
 
